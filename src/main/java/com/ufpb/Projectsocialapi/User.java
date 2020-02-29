@@ -1,19 +1,32 @@
+package com.ufpb.Projectsocialapi;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
-	private final int id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private String senha;
 	private String name;
 	private String email;
 	private String username;
 	private String phoneNumber;
 	
-	public User(int id, String name, String email,String username, String phoneNumber) {
-		this.id = id;
+	public User() {
+		
+	}
+	
+	public User(String name, String email, String username, String phoneNumber) {
 		this.name = name;
 		this.email = email;
 		this.username = username;
 		this.phoneNumber = phoneNumber;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}

@@ -1,10 +1,10 @@
-package com.code.brekers.projectsocial;
+package com.ufpb.Projectsocialapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectSocialApplicationTests {
+class ProjectSocialApiApplicationTests {
 
 	@Test
 	void contextLoads() {

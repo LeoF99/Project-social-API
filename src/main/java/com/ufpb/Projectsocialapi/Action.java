@@ -1,20 +1,31 @@
+package com.ufpb.Projectsocialapi;
 
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class Task {
-	private final int id;
+@Entity
+public class Action {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String name;
 	private String description;
-	private ArrayList<User> participants = new ArrayList<User>();
+	private String location;
 	private boolean status;
 	
-	public Task(int id, String name, String description, boolean status) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.status = status;
+	public Action() {
+		
 	}
 	
+	public Action(String name, String description, String location, boolean status) {
+		this.name = name;
+		this.description = description;
+		this.location = location;
+		this.status = status;
+	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -27,8 +38,8 @@ public class Task {
 		return this.description;
 	}
 	
-	public ArrayList<User> getParticipants(){
-		return this.participants;
+	public String getlocation() {
+		return this.location;
 	}
 	
 	public boolean getStatus() {
@@ -41,6 +52,10 @@ public class Task {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 	public void setStatus(boolean status) {
