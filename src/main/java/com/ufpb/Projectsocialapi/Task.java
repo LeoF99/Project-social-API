@@ -1,8 +1,6 @@
 package com.ufpb.Projectsocialapi;
 
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +13,7 @@ public class Task {
 	private int id;
 	private String name;
 	private String description;
-	private ArrayList<User> participants = new ArrayList<User>();
-	private boolean status;
+	private boolean status = true;
 	
 	public Task() {
 		
@@ -30,19 +27,13 @@ public class Task {
 		return this.name;
 	}
 	
-	public Task(String name, String description, ArrayList<User> participants, boolean status) {
+	public Task(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.participants = participants;
-		this.status = status;
 	}
 
 	public String getDescription() {
 		return this.description;
-	}
-	
-	public ArrayList<User> getParticipants(){
-		return this.participants;
 	}
 	
 	public boolean getStatus() {

@@ -13,17 +13,16 @@ public class Action {
 	private String name;
 	private String description;
 	private String location;
-	private boolean status;
+	private boolean status = true;
 	
 	public Action() {
 		
 	}
 	
-	public Action(String name, String description, String location, boolean status) {
+	public Action(String name, String description, String location) {
 		this.name = name;
 		this.description = description;
 		this.location = location;
-		this.status = status;
 	}
 
 	public int getId() {
