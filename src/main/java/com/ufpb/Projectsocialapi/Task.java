@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -15,6 +17,18 @@ public class Task {
 	private String description;
 	private boolean status = true;
 	
+	@ManyToOne
+	@JoinColumn(name = "action_id")
+	private Action action;
+	
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
 	public Task() {
 		
 	}

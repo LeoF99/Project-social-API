@@ -1,9 +1,16 @@
 package com.ufpb.Projectsocialapi;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -16,6 +23,23 @@ public class User {
 	private String username;
 	private String phoneNumber;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Action> actions;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "join_action",
+			joinColumns = @JoinColumn(name = "action_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+	private List<Action> activeActions;
+	
+	public List<Action> getActiveActions() {
+		return activeActions;
+	}
+
+	public void setActiveActions(List<Action> activeActions) {
+		this.activeActions = activeActions;
+	}
+
 	public User() {
 		
 	}

@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 public class TaskService {
 	@Autowired
 	private TaskRepository<Task, Long> taskRepository;
+	@Autowired
+	private ActionRepository<Action, Long> actionRepository;
 	
-	public Task newTask(String name, String desc) {
+	public Task newTask(String name, String desc, int actionId) {
+		Action a = actionRepository.findById(actionId).get();
 		Task t = new Task(name, desc);
+		t.setAction(a);
 		taskRepository.save(t);
 		return t;
 	}

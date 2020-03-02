@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
 	@Autowired
 	private UserRepository<User, Long> userRepository;
+	@Autowired
+	private ActionRepository<Action, Long> actionRepository;
 	
 	public User newUser(String name, String email, String username, String telefone) {
 		User u = new User(name, email, username, telefone);
@@ -65,5 +67,31 @@ public class UserService {
 		}else {
 			return null;
 		}
+	}
+	
+	public Action joinAction(int actionId, int userId) {
+		User u = userRepository.findById(userId).get();
+		Action a = actionRepository.findById(actionId).get();
+		
+		u.getActiveActions().add(a);
+		a.getActiveUsers().add(u);
+		
+		userRepository.save(u);
+		actionRepository.save(a);
+		
+		return a;
+	}
+	
+	public Action exitAction(int actionId, int userId) {
+		User u = userRepository.findById(userId).get();
+		Action a = actionRepository.findById(actionId).get();
+		
+		u.getActiveActions().remove(a);
+		a.getActiveUsers().remove(u);
+		
+		userRepository.save(u);
+		actionRepository.save(a);
+		
+		return a;
 	}
 }

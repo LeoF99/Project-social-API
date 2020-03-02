@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 public class ActionService {
 	@Autowired
 	private ActionRepository<Action, Long> ActionRepository;
+	@Autowired
+	private UserRepository<User, Long> userRepository;
 	
-	public Action newAction(String name, String description, String location) {
+	public Action newAction(String name, String description, String location, int userId) {
+		User u = userRepository.findById(userId).get();
 		Action a = new Action(name, description, location);
+		a.setUser(u);
 		ActionRepository.save(a);
 		return a;
 	}

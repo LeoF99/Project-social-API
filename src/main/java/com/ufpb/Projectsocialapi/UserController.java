@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path="/users")
+@RequestMapping(path = "/users")
 public class UserController {
 	@Autowired
 	private UserService service;
@@ -78,5 +78,17 @@ public class UserController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@RequestMapping(value = "/{uid}/actions/{id}/join", method = RequestMethod.POST)
+	public ResponseEntity<Action> joinAction(@PathVariable("uid")int userId, @PathVariable("id")int actionId){
+		Action a = this.service.joinAction(actionId, userId);
+		return new ResponseEntity<Action>(a, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{uid}/actions/{id}/exit", method = RequestMethod.POST)
+	public ResponseEntity<Action> exitAction(@PathVariable("uid")int userId, @PathVariable("id")int actionId){
+		Action a = this.service.exitAction(actionId, userId);
+		return new ResponseEntity<Action>(a, HttpStatus.OK);
 	}
 }
