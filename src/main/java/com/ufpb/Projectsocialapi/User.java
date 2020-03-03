@@ -26,11 +26,25 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Action> actions;
 	
+	public List<Task> getActiveTasks() {
+		return activeTasks;
+	}
+
+	public void setActiveTasks(List<Task> activeTasks) {
+		this.activeTasks = activeTasks;
+	}
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "join_action",
 			joinColumns = @JoinColumn(name = "action_id", referencedColumnName = "id"),
 			inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
 	private List<Action> activeActions;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "join_task",
+			joinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+	private List<Task> activeTasks;
 	
 	public List<Action> getActiveActions() {
 		return activeActions;

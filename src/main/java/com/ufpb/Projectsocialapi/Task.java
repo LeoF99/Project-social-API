@@ -1,11 +1,14 @@
 package com.ufpb.Projectsocialapi;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -13,6 +16,14 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	public List<User> getTaskUsers() {
+		return taskUsers;
+	}
+
+	public void setTaskUsers(List<User> taskUsers) {
+		this.taskUsers = taskUsers;
+	}
+
 	private String name;
 	private String description;
 	private boolean status = true;
@@ -20,6 +31,9 @@ public class Task {
 	@ManyToOne
 	@JoinColumn(name = "action_id")
 	private Action action;
+	
+	@ManyToMany
+	private List<User> taskUsers;
 	
 	public Action getAction() {
 		return action;

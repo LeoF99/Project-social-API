@@ -91,4 +91,16 @@ public class UserController {
 		Action a = this.service.exitAction(actionId, userId);
 		return new ResponseEntity<Action>(a, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/{uid}/actions/{aid}/tasks/{tid}/join", method = RequestMethod.POST)
+	public ResponseEntity<Task> joinTask(@PathVariable("tid")int taskId, @PathVariable("uid")int userId){
+		Task t = this.service.JoinTask(taskId, userId);
+		return new ResponseEntity<Task>(t, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{uid}/actions/{aid}/tasks/{tid}/exit", method = RequestMethod.POST)
+	public ResponseEntity<Task> exitTask(@PathVariable("tid")int taskId, @PathVariable("uid")int userId){
+		Task t = this.service.exitTask(taskId, userId);
+		return new ResponseEntity<Task>(t, HttpStatus.OK);
+	}
 }

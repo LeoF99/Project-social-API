@@ -11,6 +11,8 @@ public class UserService {
 	private UserRepository<User, Long> userRepository;
 	@Autowired
 	private ActionRepository<Action, Long> actionRepository;
+	@Autowired
+	private TaskRepository<Task, Long> taskRepository;
 	
 	public User newUser(String name, String email, String username, String telefone) {
 		User u = new User(name, email, username, telefone);
@@ -93,5 +95,31 @@ public class UserService {
 		actionRepository.save(a);
 		
 		return a;
+	}
+	
+	public Task JoinTask(int taskId, int userId) {
+		User u = userRepository.findById(userId).get();
+		Task t = taskRepository.findById(taskId).get();
+		
+		u.getActiveTasks().add(t);
+		t.getTaskUsers().add(u);
+		
+		userRepository.save(u);
+		taskRepository.save(t);
+		
+		return t;
+	}
+	
+	public Task exitTask(int taskId, int userId) {
+		User u = userRepository.findById(userId).get();
+		Task t = taskRepository.findById(taskId).get();
+		
+		u.getActiveTasks().remove(t);
+		t.getTaskUsers().remove(u);
+		
+		userRepository.save(u);
+		taskRepository.save(t);
+		
+		return t;
 	}
 }
